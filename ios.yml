@@ -14,7 +14,7 @@
         ios_command:
           commands:
             - show run | i hostname
-            - provider: "{{ cli }}"
+              provider: "{{ cli }}"
           register: output
       - name: show output
         when: '"iosv-2" in "{{output.stdout }}"'
