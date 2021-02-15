@@ -1,0 +1,24 @@
+---
+- name: Get Juno Facts
+  hosts: "juno_devs"
+  gather_facts: false
+  connection: local
+
+  vars:
+    netconf:
+      host: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      port: 830
+      transport: netconf
+
+  tasks:
+    - name: collect default set of facts
+      junos_facts:
+        provider: "{{ netconf }}"
+
+      register: output
+
+    - name: show output
+      debug:
+        var: output
