@@ -1,0 +1,36 @@
+---
+- name: Deploy A Box
+  vmware_guest:
+    hostname: '{{ host }}'
+    username: '{{ host }}'
+    password: '{{ password }}'
+    validate_certs: no
+    datacenter: '{{ data }}'
+    cluster: '{{ cluster }}'
+    folder: '{{ folder }}'
+    name: '{{ inventory_hostname }}'
+    guest_id: '{{ guest_id }}'
+    annotation: "{{ guest_notes }}"
+    disk:
+    - size_gb: 100
+      type: thin
+      datastore: '{{ datastore }}'
+    networks:
+    - name: '{{ net1 }}'
+      ip: '{{ net1_ip }}'
+      netmask: '{{ netmask }}'
+      gateway: '{{ gateway }}'
+      dns_servers:
+      - '{{ guest_dns_server }}'
+    hardware:
+      memory_mb: '{{ memory }}'
+      num_cpus: '{{ vcpu }}'
+    customization:
+      dns_servers:
+      - '{{ guest_dns_server }}'
+      domain : '{{ dm }}'
+      hostname: '{{ hn }}'
+    template: '{{ gt }}'
+    wait_for_ip_address: no
+    state: poweredon
+  delegate_to: localhost
