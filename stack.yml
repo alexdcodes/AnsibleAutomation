@@ -1,5 +1,5 @@
 ---
-# Site Stack Example.
+# Automate Development Env Deployments.
 
 - hosts: all
 
@@ -14,7 +14,7 @@
 - hosts: devservers
 
   roles:
-  - base-apache
+  - base-cisco
   - web
 
 - hosts: lbservers
@@ -25,5 +25,5 @@
 - hosts: monitoring
 
   roles:
-  - base-apache
+  - base-cisco
   - nagios
