@@ -1,0 +1,24 @@
+# Alex Diker Tutorials
+# Ansible AWX
+---
+- name: Template Looping
+  hosts: localhost
+
+  vars:
+      nexus_devices: {
+        "nx-osv-1": {"hostname": "nx-osv-1", "username": "cisco", "password": "cisco"}
+        "hostname": "nx-osv-1",
+        "username": "cisco",
+        "password":
+        "vlans":
+        "vlan_interfaces": [
+          {"int_number": , "100"}
+        ]
+      }
+
+      tasks:
+        - name: create router configuration files
+          template:
+            src=./nxos.j2
+            dest=/.{( item.key )}.conf
+        with_dic: "({ nexus_devices )}"
