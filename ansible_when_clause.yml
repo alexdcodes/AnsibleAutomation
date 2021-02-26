@@ -1,0 +1,28 @@
+# Ansible AWX ALEX DIKER
+---
+- name: IOS Command Output
+  host: "iosv_devices"
+  gather_factors: false
+  connection: local
+  vars:
+    cli:
+      host: "{{ ansible_host }}"
+      username: "{{ username}}"
+      password: "{{ password }}"
+      transport: cli
+  tasks:
+    - name: show hostname
+      ios_command
+      commands:
+        - show run | i hostname
+          provider: "{{ cli }}"
+      register: output
+    - name: show output
+      when: '"iosv-2" in " {{ output.stdout }}"'
+      ios_config:
+        lines:
+          - loging buffered 30000
+        provider: "{{ cli }}"
+        debug:
+          msg: '{{ output }}'
+

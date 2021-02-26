@@ -1,0 +1,6 @@
+---
+- name: Setup AlgoSec Rule
+  algo_sec:
+    hostname: '{{ host }}'
+    username: '{{ host }}'
+    password: '{{ password }}'
