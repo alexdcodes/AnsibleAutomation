@@ -1,0 +1,32 @@
+# Alex Diker
+#   _____  .__                  ________  .__ __
+#  /  _  \ |  |   ____ ___  ___ \______ \ |__|  | __ ___________
+# /  /_\  \|  | _/ __ \\  \/  /  |    |  \|  |  |/ // __ \_  __ \
+#/    |    \  |_\  ___/ >    <   |    `   \  |    <\  ___/|  | \/
+#\____|__  /____/\___  >__/\_ \ /_______  /__|__|_ \\___  >__|
+#        \/          \/      \/         \/        \/    \/
+#
+# Ansible AWX
+---
+- name: Get Juniper Device Facts
+  hosts: "junos_devices"
+  gather_facts: false
+  connection: local
+  vars:
+    netconf:
+      host: "{{ ansible_host }}"
+      username: "{{ username}}"
+      password: "{{ password }}"
+      port: 830
+      transport: netconf
+
+  tasks:
+    - name: collect default set of facts
+      junos_facts:
+        provider: "{{ netconf }}"
+
+      register: output
+
+    - name: show output
+      debug:
+        var: output

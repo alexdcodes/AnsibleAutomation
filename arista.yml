@@ -1,0 +1,24 @@
+#   _____  .__                  ________  .__ __
+#  /  _  \ |  |   ____ ___  ___ \______ \ |__|  | __ ___________
+# /  /_\  \|  | _/ __ \\  \/  /  |    |  \|  |  |/ // __ \_  __ \
+#/    |    \  |_\  ___/ >    <   |    `   \  |    <\  ___/|  | \/
+#\____|__  /____/\___  >__/\_ \ /_______  /__|__|_ \\___  >__|
+#        \/          \/      \/         \/        \/    \/
+#
+---
+- name: Arista - EOS Show Commands
+  gather_facts: false
+  connection: local
+
+  vars:
+  cli:
+    host: "{{ ansible_host }}"
+    username: "artista"
+    password: "artista"
+    authorize: true
+    transport: cli
+
+    tasks:
+      - name: eos show commands
+        eos_command:
+          command:
