@@ -1,0 +1,58 @@
+# Date: 02 04 2021
+# Alex Diker
+---
+- name: Gathering Facts Networking
+  maximum_fail_percentage: 50
+  #ignore_errors: no
+  ignore_errors: yes
+  connecton: network_cli
+  gather_facts: false
+  hosts: all
+  tasks: all
+
+- name: Gathering facts via ios_facts module
+  ios_facts:
+    when: ansible_network_os == 'ios'
+
+- name: Display certain facts
+  debug:
+    msg: "The hostname is {{ ansible_net_hostname }} running {{ ansible_net_version }}"
+
+- name: Display all facts for a host
+  debug:
+    var: hostvars['ios-1']
+
+- tasks:
+    name: eli
+    command: echo {{ item }}
+    with_items: ['r1', 'r2', 'r3', 'r4' , 'r5', 'r6', 'r7']
+
+- tasks:
+    name: adding v lan networks
+    eos_config:
+      lines:
+        - vlan {{ item }}
+      provider: {{ cli }}
+    with_items: {{ vlan_numbers }}
+      - 200
+      - 300
+
+- tasks:
+    name: add vln
+    nxos_config:
+      lines:
+        - vlan {{ item.key }}
+      provider: {{ cli }}
+    with_dict: "{{ vlans }}"
+
+- name: configure vlans
+  nxos_config:
+    lines:
+      - description {{ item.values.name }}
+      - ip address {{ item.value.ip }} / 24
+    provider: "{{ cli }}"
+    parents: interface vlan {{ items.key }}
+  with_dict: "{{ vlans }}"
+
+
+# ansible-playbook -i hosts nf.yml
