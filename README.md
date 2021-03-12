@@ -1,6 +1,10 @@
-# Ansible Automation Knowledge Transfer and Helper
+# Ansible Automation / Knowledge Transfer and Helper
 
-Ansible Repository for Network Automation
-Feel free to use. This is what github is for. 
+Purporse of this repository is to teach Ansible YML Coding. 
 
+- Scripts to help start automating using Tower or AWX. 
+
+# Coming Soon
+
+- Bulk DNS Changes Script - BlueCat DNS Changes 
 
